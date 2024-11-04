@@ -8,6 +8,7 @@ import 'package:webpageprac/widget/main_drawer.dart';
 import 'package:webpageprac/widget/footer.dart';
 import 'package:webpageprac/widget/main_widget/main_carousel_slider.dart';
 import 'package:webpageprac/widget/main_widget/main_now.dart'; // MainNow 위젯 가져오기
+import 'package:webpageprac/widget/main_widget/main_popular.dart';
 import 'data/movie_data.dart';
 
 class HomePage extends StatefulWidget {
@@ -144,41 +145,7 @@ class _HomePageState extends State<HomePage> {
                     // 3항 연산자로 로딩 중에는 스켈레톤, 로딩 완료 시에는 데이터를 표시
                     child: isPopularLoading
                         ? const PopularSkeleton() // 로딩 중에는 PopularSkeleton
-                        : GridView.builder(
-                      gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 5, // 한 줄에 5개의 아이템
-                        childAspectRatio: 0.8, // 카드의 비율 설정
-                      ),
-                      itemCount: _popularMovies.length, // Popular 영화 개수
-                      itemBuilder: (context, index) {
-                        final movie = _popularMovies[index];
-                        return Card(
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: Image.network(
-                                  'https://image.tmdb.org/t/p/w500/${movie.posterPath}',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  movie.title,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87, // 글자 색상을 흰색으로 설정
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
+                        : MainPopular(movies: _popularMovies)
                   );
                 },
               ),

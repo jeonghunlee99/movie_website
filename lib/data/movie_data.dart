@@ -66,14 +66,14 @@ class MovieData {
     );
 
     if (response.statusCode == 200) {
-      print(response.body); // 성공 메시지로 변경
+      print(response.body);
       return ((jsonDecode(response.body)['results']) as List)
           .map((e) => MovieModel.fromJson(e)).toList();
     } else {
-      print('영화 데이터 로드 실패: ${response.statusCode} ${response.body}'); // 에러 로그 추가
+      print('영화 데이터 로드 실패: ${response.statusCode} ${response.body}');
       throw Exception("영화 데이터 로드 실패");
     }
   }
 
-   
+
 }

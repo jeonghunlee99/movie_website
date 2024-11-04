@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
 import '../data/movie_data.dart';
 import '../model/movie_model.dart';
+import 'movie_dialog.dart';
 
 class IconSearchbar extends StatefulWidget implements PreferredSizeWidget {
   const IconSearchbar({super.key});
@@ -20,15 +20,14 @@ class IconSearchbarState extends State<IconSearchbar> {
   @override
   void initState() {
     super.initState();
-    getMovieListData(); // 데이터 로드 호출
+    getMovieListData();
   }
 
   getMovieListData() async {
     var data = MovieData();
-    _movieList = await data.movieList(); // 영화 데이터 API 호출
+    _movieList = await data.movieList();
   }
 
-  // CustomSearchDelegate를 호출하는 메서드
   void _startSearch(BuildContext context) {
     showSearch(
       context: context,
@@ -44,7 +43,7 @@ class IconSearchbarState extends State<IconSearchbar> {
       title: Padding(
         padding: const EdgeInsets.only(top: 10),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween, // 양쪽 끝에 배치
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
@@ -53,7 +52,7 @@ class IconSearchbarState extends State<IconSearchbar> {
             ),
             IconButton(
               icon: const Icon(Icons.search),
-              onPressed: () => _startSearch(context), // 검색 시작
+              onPressed: () => _startSearch(context),
             ),
           ],
         ),
@@ -76,11 +75,54 @@ class CustomSearchDelegate extends SearchDelegate<MovieModel> {
         borderSide: BorderSide.none,
       ),
       filled: true,
-      fillColor: Colors.white, // 배경 색상
+      fillColor: Colors.white,
       contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-      hintStyle: TextStyle(color: Colors.grey[600], fontSize: 15), // 힌트 글씨 색상
+      hintStyle: TextStyle(color: Colors.grey[600], fontSize: 15),
     ),
   );
+
+  void showMovieDialog(BuildContext context, MovieModel movie) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return MovieDialog(
+          title: movie.title,
+          overview: movie.overview,
+          posterPath: movie.posterPath,
+          releaseDate: movie.releaseDate,
+        );
+      },
+    );
+  }
+
+  Widget buildListView(BuildContext context, List<MovieModel> movies) {
+    return ListView.builder(
+      itemCount: movies.length,
+      itemBuilder: (context, index) {
+        final movie = movies[index];
+        return ListTile(
+          title: Text(movie.title),
+          onTap: () => showMovieDialog(context, movie),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    final results = movieList
+        .where((movie) => movie.title.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+    return buildListView(context, results);
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggestions = movieList.where((movie) {
+      return movie.title.toLowerCase().contains(query.toLowerCase());
+    }).toList();
+    return buildListView(context, suggestions);
+  }
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -99,46 +141,7 @@ class CustomSearchDelegate extends SearchDelegate<MovieModel> {
     return IconButton(
       icon: const Icon(Icons.arrow_back),
       onPressed: () {
-        Navigator.pop(context); // 뒤로가기 버튼 클릭 시 검색화면 닫기
-      },
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    final results = movieList
-        .where((movie) => movie.title.toLowerCase().contains(query.toLowerCase()))
-        .toList();
-
-    return ListView.builder(
-      itemCount: results.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(results[index].title),
-          onTap: () {
-            close(context, results[index]); // 결과 선택 시 닫기
-          },
-        );
-      },
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    final suggestions = movieList.where((movie) {
-      return movie.title.toLowerCase().contains(query.toLowerCase());
-    }).toList();
-
-    return ListView.builder(
-      itemCount: suggestions.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(suggestions[index].title),
-          onTap: () {
-            query = suggestions[index].title; // 선택된 제목으로 쿼리 업데이트
-            showResults(context); // 결과 표시
-          },
-        );
+        Navigator.pop(context);
       },
     );
   }

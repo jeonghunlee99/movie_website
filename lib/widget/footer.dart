@@ -33,12 +33,12 @@ class Footer extends StatelessWidget {
           SizedBox(height: 10),
           Text(
             "Powered by Flutter",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.white),
           ),
           SizedBox(height: 10),
           Text(
             "© 2024 MovieApp. All Rights Reserved.",
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 14,color: Colors.white),
           ),
           SizedBox(height: 10),
         ],
