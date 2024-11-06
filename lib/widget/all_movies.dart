@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../data/movie_data.dart';
 import '../model/movie_model.dart';
+import 'movie_dialog.dart';
 
 class AllMoviesScreen extends StatefulWidget {
   const AllMoviesScreen({super.key});
@@ -82,11 +83,16 @@ class AllMoviesScreenState extends State<AllMoviesScreen> {
             onTap: () {
               showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  title: Text(movie.title),
-                  content: Text(movie.overview),
-                ),
+                builder: (BuildContext context) {
+                  return MovieDialog(
+                    title: movie.title,
+                    overview: movie.overview,
+                    posterPath: movie.posterPath,
+                    releaseDate: movie.releaseDate,
+                  );
+                },
               );
+
             },
             child: Card(
               child: Column(
