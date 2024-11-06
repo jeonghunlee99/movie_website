@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
@@ -13,22 +14,16 @@ class MainDrawer extends StatelessWidget {
             height: 20,
           ),
           TextButton(
-              onPressed: () {},
+              onPressed: () { context.push('/all');},
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Text("drawer1"),
+                child: Text("All Movies"),
               ),
           ),
           const SizedBox(
             height: 20,
           ),
-          TextButton(
-            onPressed: () {},
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Text("drawer2"),
-            ),
-          ),
+
         ]
       ),
     );
