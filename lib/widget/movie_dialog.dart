@@ -55,7 +55,7 @@ class MovieDialog extends StatelessWidget {
                       Text(
                         overview,
                         style: const TextStyle(
-                          fontSize: 50,  // 50에서 14로 변경: 텍스트 크기 조정
+                          fontSize: 50,
                           color: Colors.black87,
                         ),
                       ),
