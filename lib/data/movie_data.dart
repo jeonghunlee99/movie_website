@@ -56,13 +56,15 @@ class MovieData {
     }
   }
 
-  Future<List<MovieModel>> movieList() async {
+  Future<List<MovieModel>> movieList({int page = 1}) async {
     final response = await http.get(
-        Uri.parse('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc'),
-        headers: {
-          'Authorization': 'Bearer $bearerToken',
-          'accept': 'application/json'
-        }
+      Uri.parse(
+        'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=$page&sort_by=popularity.desc',
+      ),
+      headers: {
+        'Authorization': 'Bearer $bearerToken',
+        'accept': 'application/json'
+      },
     );
 
     if (response.statusCode == 200) {
