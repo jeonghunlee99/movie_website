@@ -45,8 +45,8 @@ class MovieDialog extends StatelessWidget {
               child: Image.network(
                 'https://image.tmdb.org/t/p/w500/$posterPath',
                 width: imageWidth, // 이미지 너비 제한
-                height: imageWidth * 1.5, // 이미지 높이 비율 유지
-                fit: BoxFit.cover,
+                height: imageWidth * 1.2, // 이미지 높이를 너비의 1.2배로 조정
+                fit: BoxFit.contain, // 이미지 전체를 보여주도록 변경
               ),
             ),
             const SizedBox(width: 16),
