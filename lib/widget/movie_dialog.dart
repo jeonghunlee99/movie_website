@@ -16,6 +16,11 @@ class MovieDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 화면 크기를 가져옴
+    final screenWidth = MediaQuery.of(context).size.width;
+    final imageWidth = screenWidth * 0.3; // 이미지 너비를 화면 너비에 따라 조정
+    final contentWidth = screenWidth * 0.6; // 텍스트 영역 너비 조정
+
     return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -24,7 +29,7 @@ class MovieDialog extends StatelessWidget {
         child: Text(
           title,
           style: const TextStyle(
-            fontSize: 30,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
           ),
@@ -39,42 +44,44 @@ class MovieDialog extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
                 'https://image.tmdb.org/t/p/w500/$posterPath',
+                width: imageWidth, // 이미지 너비 제한
+                height: imageWidth * 1.5, // 이미지 높이 비율 유지
                 fit: BoxFit.cover,
               ),
             ),
             const SizedBox(width: 16),
             Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  color: Colors.grey[200],
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        overview,
-                        style: const TextStyle(
-                          fontSize: 50,
-                          color: Colors.black87,
-                        ),
+              child: Container(
+                width: contentWidth, // 텍스트 영역 너비 제한
+                color: Colors.grey[200],
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      overview,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black87,
                       ),
-                      const SizedBox(height: 16),
-                      const Divider(
-                        color: Colors.grey,
-                        thickness: 1,
+
+
+                    ),
+                    const SizedBox(height: 16),
+                    const Divider(
+                      color: Colors.grey,
+                      thickness: 1,
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Release Date: $releaseDate',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black54,
                       ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'Release Date: $releaseDate',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontStyle: FontStyle.italic,
-                          color: Colors.black54,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
