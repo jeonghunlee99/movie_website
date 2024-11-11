@@ -32,6 +32,7 @@ class Myapp extends StatelessWidget {
         hintStyle: TextStyle(color: Colors.grey[600]),
     fillColor: Colors.white,
     ),
+          fontFamily: 'NotoSansKR'
     ),);
   }
 }
