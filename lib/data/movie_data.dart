@@ -9,7 +9,7 @@ class MovieData {
 
   Future<List<MovieModel>> fetchTopRatedMovie() async {
     final response = await http
-        .get(Uri.parse('$baseUrl/top_rated?language=en-US&page=1'), headers: {
+        .get(Uri.parse('$baseUrl/top_rated?language=ko-KR&page=1'), headers: {
       'Authorization': 'Bearer $bearerToken',
       'accept': 'application/json'
     });
@@ -23,9 +23,13 @@ class MovieData {
     }
   }
 
+
+
+
+
   Future<List<MovieModel>> fetchPopularMovies() async {
     final response = await http
-        .get(Uri.parse('$baseUrl/popular?language=en-US&page=1'), headers: {
+        .get(Uri.parse('$baseUrl/popular?language=ko-KR&page=1'), headers: {
       'Authorization': 'Bearer $bearerToken',
       'accept': 'application/json'
     });
@@ -42,7 +46,7 @@ class MovieData {
 
   Future<List<MovieModel>> fetchNowPlayingMovies() async {
     final response = await http
-        .get(Uri.parse('$baseUrl/now_playing?language=en-US&page=1'), headers: {
+        .get(Uri.parse('$baseUrl/now_playing?language=ko-KR&page=1'), headers: {
       'Authorization': 'Bearer $bearerToken',
       'accept': 'application/json'
     });
@@ -59,7 +63,7 @@ class MovieData {
   Future<List<MovieModel>> movieList({int page = 1}) async {
     final response = await http.get(
       Uri.parse(
-        'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=$page&sort_by=popularity.desc',
+        'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=ko-KR&page=$page&sort_by=popularity.desc',
       ),
       headers: {
         'Authorization': 'Bearer $bearerToken',
