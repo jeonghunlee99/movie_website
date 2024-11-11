@@ -6,9 +6,9 @@
 
 웹사이트 모습
 ---
-![제목 없는 동영상 - Clipchamp로 제작 (2) (1)](https://github.com/user-attachments/assets/0b0736e7-faed-48b7-948d-f7978224a29a)
-![제목 없는 동영상 - Clipchamp로 제작 (1) (1)](https://github.com/user-attachments/assets/c95dbdd0-2bbd-47e6-b141-50f54f2f3b65)
-![1번영상 (1)](https://github.com/user-attachments/assets/fb304fd9-b8c2-4415-be4f-846e69a81cdb)
+![1](https://github.com/user-attachments/assets/9e6d17d9-f894-4b66-927f-d6415af6061c)
+![2](https://github.com/user-attachments/assets/21772009-b64f-4e69-aa02-f82efc1f4757)
+![3](https://github.com/user-attachments/assets/3596886f-bf5e-49a4-9bac-e9144d02bee3)
 
 ## 🗝 **핵심 기능**
 
